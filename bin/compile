@@ -96,9 +96,6 @@ export PATH="$SALESFORCE_DIR/node/bin":$PATH
 # export NODE_PATH=$XDG_DATA_HOME/heroku/plugins/node_modules
 
 status "Installing node modules..."
-cp $BP_DIR/package.json $BUILD_DIR/package.json
-cd $BUILD_DIR && npm install --production
-cd $BUILD_DIR && node "require('salesforce-alm').sourceConvertApi"
 cp -R $BP_DIR/lib/* $SALESFORCE_DIR/
 cp $BP_DIR/package.json $XDG_DATA_HOME/heroku/plugins/package.json
 cd $XDG_DATA_HOME/heroku/plugins
@@ -111,6 +108,9 @@ if [ ! -f $SALESFORCE_DIR/node/bin/node ]; then
     error "Node not found at $SALESFORCE_DIR/node/bin/node"
 fi
 
+status "Actually installing node modules"
+cp $BP_DIR/package.json $BUILD_DIR/package.json
+cd $BUILD_DIR && npm install --production
 
 ###   W R I T E   E N V   P R O F I L E   S C R I P T
 # write env script to set various vars so release and test scripts
