@@ -96,8 +96,9 @@ export PATH="$SALESFORCE_DIR/node/bin":$PATH
 # export NODE_PATH=$XDG_DATA_HOME/heroku/plugins/node_modules
 
 status "Installing node modules..."
-cd $BP_DIR && npm install --production
-node "require('salesforce-alm').sourceConvertApi"
+cp $BP_DIR/package.json $BUILD_DIR/package.json
+cd $BUILD_DIR && npm install --production
+cd $BUILD_DIR && node "require('salesforce-alm').sourceConvertApi"
 cp -R $BP_DIR/lib/* $SALESFORCE_DIR/
 cp $BP_DIR/package.json $XDG_DATA_HOME/heroku/plugins/package.json
 cd $XDG_DATA_HOME/heroku/plugins
