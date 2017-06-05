@@ -93,9 +93,10 @@ cp -a $SALESFORCE_CACHE_DIR/node $SALESFORCE_DIR/node
 export PATH="$SALESFORCE_DIR/node/bin":$PATH
 
 # re-use node modules installed w/ plugins
-export NODE_PATH=$XDG_DATA_HOME/heroku/plugins/node_modules
+# export NODE_PATH=$XDG_DATA_HOME/heroku/plugins/node_modules
 
 status "Installing node modules..."
+cd $BP_DIR && npm install
 cp -R $BP_DIR/lib/* $SALESFORCE_DIR/
 cp $BP_DIR/package.json $XDG_DATA_HOME/heroku/plugins/package.json
 cd $XDG_DATA_HOME/heroku/plugins
